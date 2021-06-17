@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Secuencia -->
+        <record model="ir.sequence" id="sequence_reception">
+            <field name="name">Número Recepción</field>
+            <field name="code">stock.reception</field>
+            <field name="active">True</field>
+            <field name="prefix">SRP/%(year)s/%(month)s/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="implementation">no_gap</field>
+        </record>		
+    </data>
+</odoo>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<record id="stock_reception_form_view" model="ir.ui.view">
+			<field name="name">stock.reception.form</field>
+			<field name="model">stock.reception</field>
+			<field name="priority" eval="12" />
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button string="Borrador" type="object" name="action_draft" attrs="{'invisible':[('state','in', ['draft','received'])]}" />
+						<button string="Recibido" type="object" name="action_received" attrs="{'invisible':[('state','in', ['validated'])]}" />
+						<button string="Validado" type="object" name="action_validated" attrs="{'invisible':[('state','in', ['validated'])]}" />
+						<button string="Crear Presupuesto" type="object" name="action_purchase_order" attrs="{'invisible':[('state','in', ['draft','received'])]}" />
+						<field name="state" widget="statusbar" statusbar_colors='{"cancel":"red","done":"blue"}' nolabel="1"/>
+					</header>
+					<sheet>
+						<group colspan="4" col="4">
+							<field name="name" attrs="{'readonly':[('state','in', ['draft','received','validated'])]}"/>
+							<field name="reception_date" attrs="{'readonly':[('state','in', ['received','validated'])]}"/>
+							<field name="partner_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':[('state','in', ['validated'])]}"/>
+							<field name="user_id" readonly="True" attrs="{'readonly':[('state','in', ['received'])]}"/>
+							<field name="picking_type_id" options="{'no_create': True, 'no_open': True}" groups="stock.group_stock_multi_locations" string="Origen"
+            					domain="[('code','=','incoming'), '|', ('warehouse_id', '=', False), ('warehouse_id.partner_id', '=', partner_id)]" 
+            					attrs="{'readonly':[('state','in', ['validated'])]}" />
+            				<field name="company_id" readonly="True" invisible="1" attrs="{'readonly':[('state','in', ['received'])]}"/>
+            				<field name="orders_id" readonly="True" force_save="1" attrs="{'readonly':[('state','in', ['received'])]}"/>
+						</group>
+						<notebook>
+							<page string="Ingreso de Trozos" name="add_pieces">
+								<group colspan="4" col="4">
+									<field name="reception_lines" nolabel="1" attrs="{'readonly':[('state','in', ['received','validated'])]}">
+                						<tree editable="bottom" >
+											<field name="name" options="{'no_create': True, 'no_open': True}" />
+											<field name="banks_id" options="{'no_create': True, 'no_open': True}" />
+											<field name="quantity" />
+										</tree>
+                					</field>
+								</group>
+							</page>
+							<page string="Información Adicional" name="add_info">
+								<field name="notes" attrs="{'readonly':[('state','in', ['validated'])]}" />
+							</page>
+                       </notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	
+		<record id="stock_reception_tree_view" model="ir.ui.view" >
+			<field name="name">stock.reception.tree</field>
+			<field name="model">stock.reception</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="reception_date" />
+					<field name="partner_id" />
+					<field name="state" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_stock_reception" model="ir.actions.act_window">
+			<field name="name">Recepción de trozos</field>
+			<field name="res_model">stock.reception</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	
+		<menuitem id="all_stock_reception" name="Recepción Trozos" parent="purchase.menu_procurement_management" sequence="15" 
+			action="action_stock_reception" groups="purchase.group_purchase_user"/>
+	</data>
+</odoo>
+
+
+

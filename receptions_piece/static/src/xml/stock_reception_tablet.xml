@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template id="stock_reception_tablet" xml:space="preserve">
+
+	<t t-name="StockReceptionTablet">
+
+            <div class="quantity">
+			  <input name="1" type="number" min="0" step="1" value="0" />
+			</div>
+
+    </t>
+
+</template>

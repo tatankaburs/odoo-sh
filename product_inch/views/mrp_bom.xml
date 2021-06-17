@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_bom_line_inch" model="ir.ui.view">
+        <field name="name">mrp.bom.line.inch</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+        
+	       	<xpath expr="//page[@name='components']/field[@name='bom_line_ids']/tree/field[@name='product_qty']" position="after">
+	            <field name="lumber_inch" digits="[14, 3]" />
+	            <field name="m3_piece" digits="[14, 3]" />
+	            <field name="metric_volum" digits="[14, 3]" />
+			</xpath>
+			
+        </field>
+    </record>
+    
+</odoo>

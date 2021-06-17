@@ -1,0 +1,7 @@
+#
+# Project specific excludes
+#
+
+*.pyc
+
+__pycache__

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<record id="action_stock_reception_mode_kiosk" model="ir.actions.client">
+	        <field name="name">Recepciones</field>
+	        <field name="tag">stock_reception_mode_kiosk</field>
+	        <field name="target">main</field>
+	    </record>
+
+	    <menuitem id="menu_stock_reception_mode_kiosk" name="Recepciones" parent="purchase.menu_procurement_management" sequence="15" 
+	    	groups="purchase.group_purchase_user" action="action_stock_reception_mode_kiosk"/>
+		
+	</data>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_production_line_inch" model="ir.ui.view">
+        <field name="name">mrp.production.line.inch</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+        	
+        	<xpath expr="//field[@name='bom_id']" position="after">
+	        	<field name="lumber_inch" digits="[14, 3]" force_save='1' invisible='1' readonly="1" />
+	            <field name="m3_piece" digits="[14, 3]" force_save='1' invisible='1' readonly="1" />
+	            <field name="metric_volum" digits="[14, 3]" force_save='1' invisible='1' readonly="1" />
+	            <field name="product_uom_qty" force_save='1' invisible='1' readonly="1" />
+        	</xpath>
+        
+	       	<xpath expr="//page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']" position="after">
+	            <field name="lumber_inch" digits="[14, 3]" />
+	            <field name="m3_piece" digits="[14, 3]" />
+	            <field name="metric_volum" digits="[14, 3]" />
+			</xpath>
+			
+        </field>
+    </record>
+    
+    <record id="mrp_production_tree_inch" model="ir.ui.view">
+        <field name="name">mrp.production.tree.inch</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+        	
+        	<xpath expr="//field[@name='bom_id']" position="after">
+	        	<field name="lumber_inch" digits="[14, 3]" optional="show" />
+	            <field name="m3_piece" digits="[14, 3]" optional="show" />
+	            <field name="metric_volum" digits="[14, 3]" optional="show" />
+	            <field name="product_uom_qty" string="Cant. Piezas" optional="show" />
+        	</xpath>
+        
+        </field>
+    </record>
+    	
+</odoo>

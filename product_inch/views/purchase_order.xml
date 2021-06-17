@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_inch" model="ir.ui.view">
+        <field name="name">purchase.order.inch</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+        
+        	<xpath expr="//field[@name='partner_ref']" position="after">
+        		<field name="orchard_id" options="{'no_create': True, 'no_open': True}" domain="[('type', '=', 'ranch'),('parent_id', '=', partner_id)]" />
+        		<field name="category_id"  widget="many2many_tags" /> 
+        		<field name="code_fsc_id" />
+        		<field name="type_fsc" />
+        	</xpath>
+        
+	       	<xpath expr="//field[@name='picking_type_id']" position="after">
+				<field name="lumber_inch" digits="[14, 3]" force_save="1" invisible='1' readonly="1" />
+				<field name="m3_piece" digits="[14, 3]" force_save="1" invisible='1' readonly="1" />
+				<field name="metric_volum" digits="[14, 3]" force_save="1" invisible='1' readonly="1" />
+				<field name="product_qty" invisible='1' force_save="1" readonly="1" />
+			</xpath>
+			
+        </field>
+    </record>
+    
+    <record id="purchase_order_tree_inch1" model="ir.ui.view">
+        <field name="name">purchase.order.tree.inch1</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+        
+        	<xpath expr="//field[@name='company_id']" position="before">
+        		<field name="orchard_id" optional="show" />
+        		<field name="category_id" optional="show" widget="many2many_tags"/>
+        		<field name="code_fsc_id" optional="show" />
+        		<field name="type_fsc" optional="show" />
+        	</xpath>
+
+	       	<xpath expr="//field[@name='amount_total']" position="before">
+				<field name="lumber_inch" digits="[14, 3]" optional="show" sum="total" />
+				<field name="m3_piece" digits="[14, 3]" optional="show" sum="total" />
+				<field name="metric_volum" digits="[14, 3]" optional="show" sum="total" />
+				<field name="product_qty" optional="show" sum="total"/>
+			</xpath>
+			
+        </field>
+    </record>
+    
+    <record id="purchase_order_tree_inch2" model="ir.ui.view">
+        <field name="name">purchase.order.tree.inch2</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+        
+        	<xpath expr="//field[@name='date_planned']" position="replace" />
+        	<xpath expr="//field[@name='partner_ref']" position="after">
+        		<field name="date_planned" invisible="context.get('quotation_only', False)" optional="show"/>
+        	</xpath>
+        	
+        	<xpath expr="//field[@name='partner_id']" position="after">
+        		<field name="orchard_id" optional="show" />
+        		<field name="category_id" optional="show" widget="many2many_tags"/>
+        		<field name="code_fsc_id" optional="show" />
+        		<field name="type_fsc" optional="show" />
+        	</xpath>
+        	
+        	<xpath expr="//field[@name='amount_untaxed']" position="replace" />
+	       	<xpath expr="//field[@name='amount_total']" position="before">
+				<field name="lumber_inch" digits="[14, 3]" optional="show" sum="total" />
+				<field name="m3_piece" digits="[14, 3]" optional="show" sum="total" />
+				<field name="metric_volum" digits="[14, 3]" optional="show" sum="total" />
+				<field name="product_qty" optional="show" sum="total" />
+				<field name="amount_untaxed" sum="Total Untaxed amount" string="Base" widget="monetary" optional="hide"/>
+			</xpath>
+			
+        </field>
+    </record>
+    
+</odoo>

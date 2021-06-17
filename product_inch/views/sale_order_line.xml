@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_order_line_inch" model="ir.ui.view">
+        <field name="name">sale.order.line.inch</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+	       	<xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+				<field name="lumber_inch" digits="[14, 3]" optional="show" attrs="{'readonly':[('type_measure','in',['m3_piece','metric_volum'])]}" sum="total" />
+				<field name="m3_piece" digits="[14, 3]" optional="show" attrs="{'readonly':[('type_measure','in',['lumber_inch','metric_volum'])]}" sum="total" />
+				<field name="metric_volum" digits="[14, 3]" optional="show" attrs="{'readonly':[('type_measure','in',['lumber_inch','m3_piece'])]}" sum="total" />
+				<field name="type_measure" invisible='1' />
+			</xpath>
+        </field>
+    </record>
+    
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_template_only_form_view_inch" model="ir.ui.view">
+        <field name="name">product.template.inch</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_template_property_form"/>
+        <field name="arch" type="xml">
+        	
+        	<xpath expr="//div[@name='options']" position="after">
+        		<div>
+        			<label for="type_measure"/>
+                    <field name="type_measure" style="width: 33%%"/>
+                    
+                </div>
+        	</xpath>
+        	
+	       	<xpath expr="//group[@name='stock_property']" position="before">
+		   		<group string="Pulgada Maderera" name="lumber" groups="stock.group_stock_user">
+					<field name="density1" attrs="{'readonly':[('type_measure','in',['m3_piece','metric_volum'])]}"/>
+					<field name="width1" attrs="{'readonly':[('type_measure','in',['m3_piece','metric_volum'])]}"/>
+					<field name="long1" attrs="{'readonly':[('type_measure','in',['m3_piece','metric_volum'])]}"/>
+					<field name="lumber_inch" digits="[14, 3]" readonly="1" force_save="1" />
+				</group>
+				<group string="Metros Cúbicos de Trozos" name="m3_piece" groups="stock.group_stock_user">
+					<field name="diameter" attrs="{'readonly':[('type_measure','in',['lumber_inch','metric_volum'])]}" />
+					<field name="length" attrs="{'readonly':[('type_measure','in',['lumber_inch','metric_volum'])]}" />
+					<field name="m3_piece" digits="[14, 3]" readonly="1" force_save="1" />
+				</group>
+				<group string="Volumen Metrico" name="metric_volum" groups="stock.group_stock_user">
+					<field name="density2" attrs="{'readonly':[('type_measure','in',['lumber_inch','m3_piece'])]}" />
+					<field name="width2" attrs="{'readonly':[('type_measure','in',['lumber_inch','m3_piece'])]}"/>
+					<field name="long2" attrs="{'readonly':[('type_measure','in',['lumber_inch','m3_piece'])]}" />
+					<field name="metric_volum" digits="[14, 3]" readonly="1" force_save="1" />
+				</group>
+				
+			</xpath>
+
+			<xpath expr="//field[@name='categ_id']" position="before">
+				<field name="bom_id" />
+			</xpath>
+
+        </field>
+    </record>
+    
+</odoo>

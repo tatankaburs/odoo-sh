@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_reception,access_stock_reception,model_stock_reception,purchase.group_purchase_user,1,1,1,1
+access_stock_reception_lines,access_stock_reception_lines,model_stock_reception_lines,purchase.group_purchase_user,1,1,1,1
+access_stock_bank,access_stock_bank,model_stock_bank,purchase.group_purchase_manager,1,1,1,1 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_picking_inch" model="ir.ui.view">
+        <field name="name">stock.picking.inch</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+        
+	       	<xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom']" position="before">
+				<field name="lumber_inch" digits="[14, 3]" />
+				<field name="m3_piece" digits="[14, 3]" />
+				<field name="metric_volum" digits="[14, 3]" />
+			</xpath>
+        </field>
+    </record>
+    
+</odoo>
